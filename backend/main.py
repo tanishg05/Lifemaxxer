@@ -117,7 +117,13 @@ RULES:
 
     except Exception as e:
         print(f"Error calling Groq: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(
+        status_code=500,
+        detail={
+            "error": "AI_PROCESSING_FAILED",
+            "message": "Something went wrong while analyzing your data. Please try again."
+        }
+    )
 
 
 @app.get("/health")
